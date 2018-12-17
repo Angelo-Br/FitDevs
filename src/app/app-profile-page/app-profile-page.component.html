@@ -1,0 +1,99 @@
+<div *ngIf="isLoading" style="text-align:center;">
+  <fa name="cog" size="5x" animation="spin"></fa>
+  <h1>Profiel aan het ophalen...</h1>
+</div>
+
+<div *ngIf="profile && !isLoading">
+  <!-- START not edit mode-->
+  <div class="content" *ngIf="profile && !isLoading">
+    <div class="c-row" style="height:92vh;">
+      <div class="left" *ngIf="!isInEdit">
+        <h2 style="text-align: center;">{{profile.User.Name}}</h2>
+        <br />
+        <div class="form-label-group input-group" style="padding-right: 10px;">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <fa name="user"></fa>
+            </div>
+          </div>
+          <input type="text" id="inputUsername" class="form-control rounded-input-with-label" [(ngModel)]="profile.User.Username"
+            disabled>
+        </div>
+        <div class="form-label-group input-group" style="padding-right: 10px;">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <fa name="calendar"></fa>
+            </div>
+          </div>
+          <input type="date" id="inputDate" class="form-control rounded-input-with-label" placeholder="Geboortedatum"
+            disabled [ngModel]="profile.User.DateOfBirth | date:'yyyy-MM-dd'">
+        </div>
+        <div class="form-label-group input-group" style="padding-right: 10px;">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <fa name="envelope"></fa>
+            </div>
+          </div>
+          <input type="email" id="inputEmail" class="form-control rounded-input-with-label" placeholder="Email adres"
+            [(ngModel)]="profile.User.Email" disabled>
+        </div>
+        <div class="form-label-group input-group" style="padding-right: 10px;">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <fa name="user-md"></fa>
+            </div>
+          </div>
+          <input type="number" id="inputLength" class="form-control rounded-input-with-label" placeholder="Lengte"
+            disabled [(ngModel)]="profile.Length">
+        </div>
+        <div class="form-label-group input-group" style="padding-right: 10px;">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <fa name="balance-scale"></fa>
+            </div>
+          </div>
+          <input type="number" id="inputWeigth" class="form-control rounded-input-with-label" placeholder="Gewicht (in kg)"
+            disabled [(ngModel)]="profile.Weigth">
+        </div>
+        <div class="form-label-group input-group" style="padding-right: 10px;" title="Lui?">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="btnGroupAddon">
+              <fa name="bed"></fa>
+            </div>
+          </div>
+          <input type="text" id="inputIsLazy" class="form-control rounded-input-with-label" placeholder="Is lui?"
+            disabled [(ngModel)]="profile.IsLazy">
+        </div>
+        <button class="btn btn-block" *ngIf="canEdit && !isInEdit" (click)="onEnableEdit()">
+          <fa name="pencil"></fa> Wijzig profiel
+        </button>
+      </div>
+    </div>
+
+    <div class="main-content">
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" (click)="openTab('achievements')">Achievements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="openTab('vrienden')">Vrienden</a>
+        </li>
+      </ul>
+      <div *ngIf="currentTab=='achievements'">
+        <app-achievement [profile]="profile" [incompletedAchievements]="incompletedAchievements"
+          [completedAchievements]="completedAchievements"></app-achievement>
+      </div>
+
+      <div *ngIf="currentTab=='vrienden'">
+        <app-friends [friends]="profile.Friends"></app-friends>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!profile && !isLoading" style="text-align:center;">
+  <fa name="times" size="5x"></fa>
+  <h1>Er is iets mis gegaan met het ophalen van het profiel!</h1>
+</div>

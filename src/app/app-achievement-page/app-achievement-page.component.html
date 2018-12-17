@@ -1,0 +1,20 @@
+<h2 style="display: inline-block">Behaalde achievement!</h2>
+<button class="btn btn-sm btn-sm-round btn-success" style="float:right;" *ngIf="canEdit && isInEdit" (click)="onSaveEdit()">
+  <fa name="save"></fa> Opslaan
+</button>
+<ul>
+  <li *ngFor="let a of completedAchievements">
+    {{a.Achievement.Name}}
+  </li>
+</ul>
+
+<h2>Zo dichtbij!</h2>
+<div *ngFor="let a of incompletedAchievements">
+  {{a.Achievement.Name}}
+  <div class="progress" style="width: 40%">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width': getPercentage(a)+'%'}"
+      attr.aria-valuenow="{{getPercentage(a)}}" aria-valuemin="0" aria-valuemax="100">
+      <span> <b>{{getPercentage(a)}}% ({{a.CurrentPoints}} / {{a.Achievement.RequiredPoints}})</b></span>
+    </div>
+  </div>
+</div>

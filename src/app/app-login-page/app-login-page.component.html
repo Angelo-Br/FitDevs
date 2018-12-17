@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <alert [hidden]="!hasError(error)" type="danger">
+            <button type="button" class="close" aria-label="Close" (click)="onClearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{error}}
+          </alert>
+          <h5 class="card-title text-center">Log in</h5>
+          <div class="form-label-group input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" id="btnGroupAddon">
+                <fa name="user"></fa>
+              </div>
+            </div>
+            <input type="text" id="inputUsername" class="form-control rounded-input-with-label" placeholder="Gebruikersnaam"
+              [(ngModel)]="username" (keydown.enter)="login()" required autofocus [disabled]="loggingIn">
+          </div>
+
+          <div class="form-label-group input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" id="btnGroupAddon">
+                <fa name="lock"></fa>
+              </div>
+            </div>
+            <input type="password" id="inputPassword" class="form-control rounded-input-with-label" placeholder="Wachtwoord"
+              (keydown.enter)="login()" [(ngModel)]="password" required [disabled]="loggingIn">
+          </div>
+          <div style="text-align: center;">
+            <div class="btn-group" role="group">
+              <button class="btn btn-big btn-lg btn-primary text-uppercase" (click)="login()" [hidden]="loggingIn">
+                Inloggen
+              </button>
+              <button class="btn btn-big btn-lg btn-success text-uppercase" (click)="onRegister()" [hidden]="loggingIn">
+                Registeren
+              </button>
+            </div>
+            <button class="btn btn-big btn-lg btn-primary text-uppercase" (click)="login()" [disabled]="loggingIn"
+              [hidden]="!loggingIn" style="width: 100%;">
+              <fa name="cog" animation="spin" size="lg"></fa>
+              Aan het inloggen...
+            </button>
+            <p class="text-muted" [hidden]="loggingIn">Wachtwoord vergeten? <a routerLink="/recover">Klik hier</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

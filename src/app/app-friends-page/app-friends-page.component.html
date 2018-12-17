@@ -1,0 +1,58 @@
+<div class="filter-bar">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<!-- 
+<ng-container matColumnDef="Naam">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
+  <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+</ng-container>
+
+
+<ng-container matColumnDef="achievements">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Achievements </th>
+  <td mat-cell *matCellDef="let row">
+    <div *ngFor="let achievement of getCompletedAchievements(row)">
+      {{achievement.Achievement.Name}}
+    </div>
+  </td>
+</ng-container>
+
+
+<div class="mat-success">
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Knoppen </th>
+    <td mat-cell *matCellDef="let row"> <button mat-raised-button color="success"> Toon Profiel </button> &nbsp;
+      <button mat-raised-button (click)="onRemoveUser(row)" color="danger"> Verwijder Vriend </button> </td>
+  </ng-container>
+</div>  -->
+
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel *ngFor="let friend of _friends" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{friend.User.Name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Show Profile And Achievements
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-tab-group>
+      <div *ngFor="let achievement of getCompletedAchievements(friend)">
+        <mat-tab label="{{achievement.Achievement.Name}}"> {{achievement.Achievement.Name}}
+          YAHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO </mat-tab>
+      </div>
+    </mat-tab-group>
+
+    <mat-action-row>
+      <button mat-raised-button color="success"> Toon Profiel </button> &nbsp;
+      <button mat-raised-button (click)="onRemoveUser(row)" color="danger"> Verwijder Vriend </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
